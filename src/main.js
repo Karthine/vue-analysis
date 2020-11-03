@@ -12,7 +12,7 @@ var app = new Vue({
   render(createElement){
     return createElement('div',{
       // todo 如果这里写成app1会直接替换掉模板页面的index.html中 <div id="app"></div> ==>渲染成<div id="app1"></div>
-      // todo 使用render函数就不会出现从插值表达式{{message}} => hello vue显示的一个过渡，会直接显示出来
+      // todo 使用render函数就不会出现从插值表达式{{message}} => hello vue显示的一个过渡，会直接显示出来；之前的过渡是因为编译器需要将template编译成render函数需要时间
       attrs:{
         id:'app1'
       }
