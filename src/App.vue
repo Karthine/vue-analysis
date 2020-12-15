@@ -10,6 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  // 局部注册 局部注册是将当前注册的组件合并到Sub.options，即：合并到当前的vm实例上，只能在当前的vm实例上使用
   components: {
     HelloWorld
   }
