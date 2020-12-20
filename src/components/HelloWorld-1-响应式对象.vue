@@ -1,5 +1,5 @@
 <template>
-  <div v-if="flag" class="hello">
+  <div class="hello">
     <h1>{{ nested.msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -11,33 +11,39 @@
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
     </ul>
-  </div>
-  <ul v-else>
     <h3>Essential Links</h3>
-    <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
+    <ul>
+      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
       <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
       <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-  </ul>
-
+    </ul>
+    <h3>Ecosystem</h3>
+    <ul>
+      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
+      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
+      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
+      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
+      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+    </ul>
+  </div>
 </template>
 
 <script>
   /**
-   * todo 为了查看组件更新 debugger 对应App-4-6-组件更新.vue
-   * 断点位置：在return function patch (oldVnode, vnode, hydrating, removeOnly) {debugger...}
+   * todo 为了查看响应式对象源码 debugger
+   * 断点位置：在initData()函数中的 observe(data, true)上面打断点
    */
   export default {
-    name: 'HelloWorld',
-    props:['flag'],
-    data(){
-      return {
-        nested:{
-          msg: 'Welcome to Your Vue.js App'
-        }
+  name: 'HelloWorld',
+  data(){
+    return {
+      nested:{
+        msg: 'Welcome to Your Vue.js App'
       }
     }
+  }
 }
 </script>
 
