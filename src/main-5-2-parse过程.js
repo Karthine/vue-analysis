@@ -4,8 +4,8 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 
 /**
- * 5-4-codegen debugger
- * 断点位置： function generate (ast,options) { debugger var state = new CodegenState(options);...)
+ * 5-2-parse debugger
+ * 断点位置：var createCompiler = createCompilerCreator(function baseCompile (template,options) { debugger var ast = parse(template.trim(), options);...}
  */
 // new Vue的代码执行是在：vue源码中的src/core/instance/index.js中
 new Vue({
