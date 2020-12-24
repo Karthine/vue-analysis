@@ -4,22 +4,12 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 
 /**
- * 6-6-slot-数据更新
+ * 6-4-slot-普通插槽
  *  断点位置
  *      1、 function processSlotOutlet (el) { debugger...}
  *      2、 genData(...debugger if (el.slotTarget && !el.slotScope) {}...)
  *      3、 function genSlot (el, state) {debugger...}
  *      4、 最终生成代码的地方    createCompilerCreator(){ var code = generate(ast, options); debugger...}
- *  问题
- *    vue是数据驱动的，只有更新对应的组件的时候，对应的组件才会重新渲染，
- *    那为啥在父组件里面更新title的值，会触发子组件的重新渲染呢？也就是本章的数据更新的内容
- *    源码的位置是在：src/core/instance/lifecycle.js中的
- *        if (needsForceUpdate) {
-              vm.$slots = resolveSlots(renderChildren, parentVnode.context)
-             vm.$forceUpdate()
-          }
-      vm.$forceUpdate()强制更新，触发了页面的渲染
- *
  */
 
 let AppLayout = {
@@ -40,7 +30,6 @@ let vm = new Vue({
       '<p>{{msg}}</p>' +
       '<p slot="footer">{{desc}}</p>' +
       '</app-layout>' +
-      '<button @click="change">change title</button>' +
       '</div>',
   data(){
     return {
@@ -51,12 +40,7 @@ let vm = new Vue({
 
   },
   components:{
-    AppLayout
-  },
-  methods:{
-    change(){
-      this.title="我是新标题"
-    }
+      AppLayout
   }
 })
 
@@ -94,4 +78,31 @@ let vm = new Vue({
 //             ])
 //       ],
 //       1)
+// }
+// 子组件
+// with(this){
+//   return_c('div',
+//       {
+//         staticClass: "container"
+//       },
+//       [
+//         _c('header',
+//             [
+//               _t("header")
+//             ],
+//             2),
+//         _c('main',
+//             [
+//               _t("default",
+//                   [
+//                     _v("默认内容")
+//                   ])
+//             ],
+//             2),
+//         _c('footer',
+//             [
+//               _t("footer")
+//             ],
+//             2)
+//       ])
 // }
