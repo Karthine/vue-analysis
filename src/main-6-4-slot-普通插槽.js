@@ -10,6 +10,9 @@ Vue.config.productionTip = false
  *      2、 genData(...debugger if (el.slotTarget && !el.slotScope) {}...)
  *      3、 function genSlot (el, state) {debugger...}
  *      4、 最终生成代码的地方    createCompilerCreator(){ var code = generate(ast, options); debugger...}
+ *
+ *  vm.$slots的值 是在 src/core/instance/render.js中的initRender()里面进行了赋值：
+ *      vm.$slots = resolveSlots(options._renderChildren, renderContext)
  */
 
 let AppLayout = {
