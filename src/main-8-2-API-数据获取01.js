@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 /**
- * 8-2-API-数据存储
+ * 8-2-API-数据获取
  * 1、moduleA,moduleB相当于子仓库，通过module的概念把store拆成一个个子仓库，
  * 子仓库里面又可以有modules
  *
@@ -83,13 +83,7 @@ const store = new Vuex.Store({
     },
     actions: {
         increment(store){
-         return new Promise(resolve => {
-             setTimeout(()=>{
-                 // todo 修改数据的入口还是得提交mutation
-                 store.commit('increment')
-                 resolve(store.rootState)
-             },1000)
-         })
+            store.commit('increment')
         }
     },
 
@@ -98,20 +92,10 @@ const store = new Vuex.Store({
 window.store = store
 console.log(store)
 
-// todo 提交一个mutation,执行mutations中的increment()方法
-store.commit('increment')
 console.log(store.state.count)
-
-store.dispatch('increment').then(rootState => {
-    console.log(rootState.count)
-})
-console.log(store.state.count)
-
-/**
- * 运行结果：
- * 立马输出: 2, 2；1s之后输出3
- *
- */
+console.log(store.getters.computedCount)
+console.log(store.state.a.count)
+console.log(store.getters['a/computedCount'])
 
 const app = new Vue({
     el: '#app',

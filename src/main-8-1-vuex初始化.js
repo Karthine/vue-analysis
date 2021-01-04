@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 /**
- * 8-2-API-数据存储
+ * 8-1-vuex初始化
  * 1、moduleA,moduleB相当于子仓库，通过module的概念把store拆成一个个子仓库，
  * 子仓库里面又可以有modules
  *
@@ -21,27 +21,6 @@ Vue.use(Vuex)
  * */
 
 const moduleA = {
-    namespaced: true,
-    state:{
-        count: 5
-    },
-    mutations:{
-        increment(state){
-            state.count++
-        }
-    },
-    actions: {
-        increment(store){
-            store.commit('increment')
-        }
-    },
-    getters: {
-        computedCount(state){
-            return state.count + 1
-        }
-    }
-}
-const moduleB = {
     namespaced: true,
     state:{
         count: 1
@@ -62,6 +41,7 @@ const moduleB = {
         }
     }
 }
+const moduleB = {}
 
 const store = new Vuex.Store({
     modules:{
@@ -83,13 +63,7 @@ const store = new Vuex.Store({
     },
     actions: {
         increment(store){
-         return new Promise(resolve => {
-             setTimeout(()=>{
-                 // todo 修改数据的入口还是得提交mutation
-                 store.commit('increment')
-                 resolve(store.rootState)
-             },1000)
-         })
+            store.commit('increment')
         }
     },
 
@@ -97,21 +71,6 @@ const store = new Vuex.Store({
 
 window.store = store
 console.log(store)
-
-// todo 提交一个mutation,执行mutations中的increment()方法
-store.commit('increment')
-console.log(store.state.count)
-
-store.dispatch('increment').then(rootState => {
-    console.log(rootState.count)
-})
-console.log(store.state.count)
-
-/**
- * 运行结果：
- * 立马输出: 2, 2；1s之后输出3
- *
- */
 
 const app = new Vue({
     el: '#app',
