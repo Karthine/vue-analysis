@@ -6,6 +6,7 @@
       <!-- 通过传入`to` 属性指定链接    -->
       <!-- <router-link> 默认会被渲染成一个 `<a>` 标签    -->
       <router-link to="/foo">Go to Foo</router-link>
+      <router-link to="/bar">Go to Bar</router-link>
     </p>
     <!--  路由出口  -->
     <!--  路由匹配到的组件将渲染在这里  -->
@@ -15,7 +16,7 @@
 
 <script>
   /**
-   * App-7-4-导航守卫
+   * App-7-1-路由注册 ~ 7-3-路由注册
    */
 export default {
   name: 'App'

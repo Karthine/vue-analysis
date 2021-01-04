@@ -4,11 +4,10 @@ import App from './App'
 
 Vue.use(VueRouter)
 /**
- * 7-5-url变化逻辑
+ * 7-4-导航守卫
  * 断点位置：
- *  1、在node_modules中的vue-router中的vue-router.esm.js中的  var HashHistory = (function (History) {...debugger ensureSlash();}
- *  2、HashHistory.prototype.push = function push (location, onComplete, onAbort) {var this$1 = this; debugger...}
- *  3、浏览器回退按钮事件监听的地方打个断点：    var handleRoutingEvent = function () {debugger...}
+ *  1、在node_modules中的vue-router中的vue-router.esm.js中的   History.prototype.transitionTo = function transitionTo (location,onComplete,onAbort) {var this$1 = this; debugger....}
+ *  2、 function transitionTo (location,onComplete,onAbort) {var this$1 = this; debugger....this.confirmTransition(route,function () {debugger...}...}
  **/
 // 1. 定义路由组件
 // 可以从其他文件 import 进来

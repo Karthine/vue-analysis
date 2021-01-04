@@ -15,7 +15,7 @@
 
 <script>
   /**
-   * App-7-4-导航守卫
+   * App-7-5-url变化逻辑
    */
 export default {
   name: 'App'
