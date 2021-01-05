@@ -5,18 +5,15 @@
     <div>root getter computedCount: {{computedCount}}</div>
     <div>module A state count: {{aCount}}</div>
     <div>module A getter computedCount: {{aComputedCount}}</div>
-    <div @click="increment">root mutation increment</div>
-    <div @click="incrementAct">root action increment</div>
-    <div @click="aIncrement">module A mutation increment</div>
-    <div @click="aIncrementArc">module A action increment</div>
   </div>
 </template>
 
 <script>
   /**
-   * App-8-4-vuex插件
+   * App-8-3-vuex数据获取语法糖
+   * mapState()，mapGetters(),mapMutations(),mapActions()的源码都定义在src/helpers.js中
    */
-  import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
+  import {mapState, mapGetters} from 'vuex'
   export default {
     name: 'App',
     computed:{
@@ -33,20 +30,7 @@
       ...mapGetters('a',{
         aComputedCount: 'computedCount'
       }),
-    },
-    methods:{
-      ...mapMutations([
-        'increment'
-      ]),
-      ...mapActions({
-        incrementAct: 'increment'
-      }),
-      ...mapMutations('a',{
-        aIncrement: 'increment'
-      }),
-      ...mapActions('a',{
-        aIncrementArc: 'increment'
-      })
+
     }
   }
 </script>

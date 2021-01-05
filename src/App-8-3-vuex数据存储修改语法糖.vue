@@ -14,7 +14,8 @@
 
 <script>
   /**
-   * App-8-4-vuex插件
+   * App-8-3-vuex数据存储/修改 语法糖
+   * mapState()，mapGetters(),mapMutations(),mapActions()的源码都定义在src/helpers.js中
    */
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
   export default {

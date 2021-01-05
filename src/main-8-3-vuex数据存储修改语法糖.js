@@ -1,14 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
-// todo logger方便调试state的变化
-import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
-const debug = process.env.NODE_ENV !== 'production'
-/**
- * 8-4-vuex插件
 
+/**
+ * 8-3-vuex数据存储/修改 语法糖
+ * 1、moduleA,moduleB相当于子仓库，通过module的概念把store拆成一个个子仓库，
+ * 子仓库里面又可以有modules
+ *
+ * 2、源码中的重要的三处逻辑
+ *      1、 this._modules = new ModuleCollection(options) // 初始化modules
+        2、 installModule(this, state, [], this._modules.root)
+        3、 resetStoreVM(this, state)
+ *
+ * 3、断点位置：
+ *   1、var Store = function Store (options) { ...  debugger this._modules = new ModuleCollection(options);...}
+ *   2、var Store = function Store (options) { ...  debugger installModule(this, state, [], this._modules.root)...}
+ *   3、var Store = function Store (options) { ...  debugger resetStoreVM(this, state)...}
  * */
 
 const moduleA = {
@@ -83,11 +92,6 @@ const store = new Vuex.Store({
          })
         }
     },
-    //=============todo 以下为新增点 ==============
-    strict:true,
-    plugins:debug ? [createLogger()] : []
-
-
 
 })
 
