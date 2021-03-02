@@ -47,7 +47,7 @@
           依次取出函数执行，如下：先放入this.$nextTick的匿名函数，然后再放入 this.msg = 'Hello Vue'的watcher的回调函数
           所以先输出 sync: Hello World，再输出nextTick: Hello World
 
-     所以：如果想拿到更新后的数据，nextTick一定要在数据改变之后在调用
+     所以：【重要！！！】如果想拿到更新后的数据，nextTick一定要在数据改变之后在调用 如上面的change()方法中
           this.$nextTick()实际上调用的是vue源码中的src/core/util/next-tick.js文件中的nextTick()方法
      */
     change1(){

@@ -43,7 +43,8 @@ let app = new Vue({
     child created
     child mounted
 
- debugger断点 先走Vue.mixin ===》 new Vue ==》_init(options) => mergeOptions(...)  ==》输出parent created --》 childComp==》 输出parent created child created child mounted
+ 至于为什么这样输出 查看vue源码解析笔记 第三章组件化第四节合并配置 的断点调试截图
+ debugger断点 先走Vue.mixin ===》 new Vue ==》_init(options) 【大Vue的_init()】=> mergeOptions(...)  ==》callHook(vm, 'created') ==> 输出parent created --》 childComp【h => h(childComp)的_init】==》callHook(vm, 'created') ===> 输出parent created child created ==>经过一些列的过程到===> child mounted
  *
  *
  * */

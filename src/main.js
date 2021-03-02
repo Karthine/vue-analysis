@@ -1,103 +1,52 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
-import App from './App'
-// todo logger方便调试state的变化
-import createLogger from 'vuex/dist/logger'
 
-Vue.use(Vuex)
-const debug = process.env.NODE_ENV !== 'production'
 /**
- * 8-4-vuex插件
-
- * */
-
-const moduleA = {
-    namespaced: true,
-    state:{
-        count: 5
+ * 第三版本 （第三章 3-4合并配置 测试）
+ * 断点位置1 Vue.prototype._init = function (options) {.....debugger  if (options && options._isComponent) {...}else{...} }
+ * 断点位置2： mergeOptions()方法里面：function mergeOptions (parent,child,vm) {debugger.....}
+ */
+let childComp = {
+    template:'<div>{{msg}}</div>',
+    created() {
+        console.log('child created')
     },
-    mutations:{
-        increment(state){
-            state.count++
-        }
+    mounted(){
+        //todo 输出this.msg能直接输出data中的msg,源码是在src/core/instance/init.js文件的Vue.prototype._init中 ---》initState(vm) --->src/core/instance/state.js中定义的
+        // 访问this.msg ===>相当于 this._data.msg ==>即data中的msg
+        // todo 但是通常不会访问_data,_开头的都是一些私有属性
+        console.log(this.msg)
+        console.log('child mounted')
     },
-    actions: {
-        increment(store){
-            store.commit('increment')
-        }
-    },
-    getters: {
-        computedCount(state){
-            return state.count + 1
-        }
-    }
-}
-const moduleB = {
-    namespaced: true,
-    state:{
-        count: 1
-    },
-    mutations:{
-        increment(state){
-            state.count++
-        }
-    },
-    actions: {
-        increment(store){
-            store.commit('increment')
-        }
-    },
-    getters: {
-        computedCount(state){
-            return state.count + 1
+    data(){
+        return {
+            msg: 'Hello Vue'
         }
     }
 }
 
-const store = new Vuex.Store({
-    modules:{
-        a: moduleA,
-        b: moduleB
+Vue.mixin({
+    created() {
+        console.log('parent created')
     },
-    state:{
-        count: 1
-    },
-    getters:{
-        computedCount(state){
-            return state.count + 1
-        }
-    },
-    mutations:{
-        increment(state){
-            state.count++
-        }
-    },
-    actions: {
-        increment(store){
-         return new Promise(resolve => {
-             setTimeout(()=>{
-                 // todo 修改数据的入口还是得提交mutation
-                 store.commit('increment')
-                 resolve(store.rootState)
-             },1000)
-         })
-        }
-    },
-    //=============todo 以下为新增点 ==============
-    strict:true,
-    plugins:debug ? [createLogger()] : []
-
-
-
+    // mounted() {
+    //     console.log('parent mounted')
+    // }
 })
 
-window.store = store
-console.log(store)
 
-const app = new Vue({
+let app = new Vue({
     el: '#app',
-    store,
-    render(h){
-        return h(App)
-    }
+    render: h => h(childComp)
 })
+
+/**
+ * 输出结果
+ *  parent created
+ *  parent created
+ child created
+ child mounted
+
+ debugger断点 先走Vue.mixin ===》 new Vue ==》_init(options) => mergeOptions(...)  ==》输出parent created --》 childComp==》 输出parent created child created child mounted
+ *
+ *
+ * */
