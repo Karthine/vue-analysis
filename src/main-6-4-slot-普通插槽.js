@@ -13,6 +13,11 @@ Vue.config.productionTip = false
  *
  *  vm.$slots的值 是在 src/core/instance/render.js中的initRender()里面进行了赋值：
  *      vm.$slots = resolveSlots(options._renderChildren, renderContext)
+ *
+ *      01:12:43~01:23:30 slot的介绍
+ *      01:23:30~01:46:40 slot的单步调试
+ *      01:46:40~01:54:48 整个案例的单步调试
+ *
  */
 
 let AppLayout = {

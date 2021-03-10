@@ -14,7 +14,8 @@ Vue.config.productionTip = false
                                          callback: `function (${baseValueExpression}) {${assignment}}`
                                        }
                     ====>transformModel()
-
+    视频分割：
+        00:58:05~01:11:49 v-model-组件 视频
  *
  */
 
@@ -35,6 +36,7 @@ let Child = {
 //       '<input :value="msg" @input="updateValue" placeholder="edit me"> '+
 //       '</div>',
 //   // todo 最后新增的，查看源码中transformModel（）的实现可知：可以修改prop和event的值,如果没有设置model,prop的值就为默认值value,event的默认值为input
+//   // todo 结合视频 第九章v-model 01:09:00~01:11:49
 //   model:{
 //     prop:'msg',
 //     event:'change'

@@ -8,6 +8,9 @@ Vue.config.productionTip = false
  * v-model整体的分析
  *    1、编译阶段 parse genDefaultModel()
  *    2、运行时 断点位置： function _update (oldVnode, vnode) {debugger...}
+ * 视频分割：
+ *    00:45:47～00:58:05 单步调试v-model-表单 视频
+ *
  */
 
 new Vue({
@@ -33,7 +36,10 @@ new Vue({
  *
  *  回忆之前的一道面试题：【契约锁】
  *    1、v-model实现数据双向绑定的原理？
+ *      答：见下面的分析
  *    2、是监听input事件？还是change事件？input事件是什么时候触发？change事件是什么时候触发？
+ *      答： input输入框的onchange事件，要在 input 失去焦点的时候才会触发
+ *          input输入框的 input事件在用户输入时触发，它是在元素值发生变化时立即触发
  *
  *  问题：
  *    1、下面的这种写法真的会和上面的那种v-model的写法一致吗？实际证明：有细微差别
@@ -51,6 +57,10 @@ new Vue({
  *
  *  todo:
  *    compositionstart，compositionen事件是干嘛的，待查，补充笔记
+ *    2021.03.04补充：
+ *      参考链接：https://blog.csdn.net/trenki/article/details/101283887
+ *      CompositionEvent触发的时候就是在文本合成系统，换句话说就是在使用输入法输入中文的时候会触发它的三个事件（compositionstart、compositionupdate、compositionend）。
+        上边三个事件从名字就很好区分，compositionstart是输入开始时，compositionupdate输入过程中不断更新，compositionend输入结束。
  */
 // let vm = new Vue({
 //   el:'#app',

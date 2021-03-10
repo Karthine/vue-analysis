@@ -7,6 +7,8 @@ Vue.config.productionTip = false
  * 6-5-slot-作用域插槽
  *
  *     断点位置： 最终生成代码的地方    createCompilerCreator(){ var code = generate(ast, options); debugger...}
+ *
+ *     01:54:48~02:31:55   作用域插槽
  */
 
 let Child = {
