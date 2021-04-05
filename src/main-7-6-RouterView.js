@@ -4,28 +4,43 @@ import App from './App'
 
 Vue.use(VueRouter)
 /**
- * 7-5-url变化逻辑
+ * 7-4-导航守卫
+ * https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E7%BB%84%E4%BB%B6%E5%86%85%E7%9A%84%E5%AE%88%E5%8D%AB
  * 断点位置：
- *  1、在node_modules中的vue-router中的vue-router.esm.js中的  var HashHistory = (function (History) {...debugger ensureSlash();}
- *  2、HashHistory.prototype.push = function push (location, onComplete, onAbort) {var this$1 = this; debugger...}
- *  3、浏览器回退按钮事件监听的地方打个断点：    var handleRoutingEvent = function () {debugger...}
+ *  1、在node_modules中的vue-router中的vue-router.esm.js中的   History.prototype.transitionTo = function transitionTo (location,onComplete,onAbort) {var this$1 = this; debugger....}
+ *  2、 function transitionTo (location,onComplete,onAbort) {var this$1 = this; debugger....this.confirmTransition(route,function () {debugger...}...}
  *
- *  01:50:17～02:06:40 url变化逻辑
+ *  分析：
+ *  1、全局：
+ 全局前置守卫  router.beforeEach((to,from,next)=>{//...})
+ 全局解析首位  router.beforeResolve((to, from, next)=>{})
+ 全局后置钩子  router.afterEach((to,from)=>{//...})
+ 2、路由独享的守卫
+ beforeEnter:(to,from,next)=>{
+            //...
+        }
+ 3、组件内的守卫
+ *beforeRouterEnter
+ *beforeRouterUpdate
+ *beforeRouterLeave
  *
+ 02:06:40~02:21:08 router-view代码介绍
+ 02:21:08～02：33：15  router-view单步调试
+ 02：33：15～
  **/
 // 1. 定义路由组件
 // 可以从其他文件 import 进来
 const Foo = {
     template: '<div>' +
         '<div>foo</div>' +
-        '<router-link to="bar" :append="true">Go to Bar</router-link>' +
+        '<router-link to="/foo/bar">Go to Bar</router-link>' +
         '<router-view></router-view>' +
         '</div>',
     beforeRouteEnter(to, from, next){
         // 在渲染该组件的对应路由被 confirm 前调用
         // 不！能！获取实例 `this`
         // 因为当前守卫执行前，组件实例还没被创建
-        console.log('foo before router enter')
+        console.log('组件内的守卫：foo beforeRouterEnter')
         console.log('this ? ', this)
         next((vm) => {
             console.log('now this?', vm)
@@ -36,7 +51,7 @@ const Foo = {
         // 举例来说，对于一个带有动态参数的路径 /foo/:id, 在/foo/1 和/foo/2之间跳转的时候，
         // 由于会渲染同样的Foo组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
         // 可以访问组件实例 `this`
-        console.log('foo before router update')
+        console.log('组件内的守卫：foo beforeRouterUpdate')
         console.log('this ? ', this)
         next()
     }
@@ -47,7 +62,7 @@ const Bar = {
     beforeRouteLeave(to, from, next){
         // 导航离开该组件的对应路由时调用
         // 可以访问组件实例 `this`
-        console.log('bar before router leave')
+        console.log('组件内的守卫：bar beforeRouterLeave')
         next()
     }
 }
@@ -63,7 +78,7 @@ const routes = [
                 path: 'bar', // todo children的 path不能加 / ,如果加了/，会导致beforeEnter()导航钩子函数不能执行 注意
                 component: Bar,
                 beforeEnter(to, from, next){
-                    console.log('bar before enter')
+                    console.log('路由独享守卫: bar beforeEnter')
                     next()
                 }
             },
@@ -77,20 +92,20 @@ const router = new VueRouter({
     routes // (缩写) 相当于routes: 相当于routes
 })
 
-// 以下三个是全局的路由守卫，每次切换的路由的时候，都会调用，包括第一次运行的时候
+//TODO 以下三个是全局的路由守卫，每次切换的路由的时候，都会调用，包括第一次运行的时候
 router.beforeEach((to, from, next)=>{
-    console.log('global before each')
+    console.log('全局前置守卫： beforeEach')
     next()  // todo next()方法调用很重要，如果不调用，Foo组件不会渲染
 })
 
 // todo afterEach 没有next参数，所以不需要调用next()方法
 router.afterEach((to, from)=>{
-    console.log('global after each')
+    console.log('全局后置守卫: afterEach')
 
 })
 
 router.beforeResolve((to, from, next)=>{
-    console.log('global before resolve')
+    console.log('全局解析守卫： beforeResolve')
     next()
 
 })

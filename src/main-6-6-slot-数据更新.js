@@ -19,6 +19,8 @@ Vue.config.productionTip = false
              vm.$forceUpdate()
           }
       vm.$forceUpdate()强制更新，触发了页面的渲染
+
+ 02：26：30~02:31:55   数据更新
  *
  */
 

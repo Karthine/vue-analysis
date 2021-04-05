@@ -4,9 +4,10 @@ import App from './App'
 
 Vue.use(VueRouter)
 /**
- * 7-1-路由注册
+ * 7-1-路由注册 & VueRouter对象
  *
- *
+ * 00:00:00~00:14:28 路由注册
+ * 00:14:28～00:23:29 VueRouter对象
  **/
 // 1. 定义路由组件
 // 可以从其他文件 import 进来

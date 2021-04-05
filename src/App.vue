@@ -1,35 +1,18 @@
 <template>
   <div id="app">
-    <div>
-      <ul>
-        <li v-for="item in items" :key="item.id">{{ item.val }}</li>
-      </ul>
-    </div>
-    <button @click="change">change</button>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-  /**
-   * App-4-7-updateChildren 【源码中debug调试updateChildren的算法 也就是组件更新的时候新旧vnode diff】
-   * 在updateChildren()方法里面打断点
-   */
+  import HelloWorld from './components/HelloWorld.vue'
+
   export default {
     name: 'App',
-    data() {
-      return {
-        items: [
-          {id: 0, val: 'A'},
-          {id: 1, val: 'B'},
-          {id: 2, val: 'C'},
-          {id: 3, val: 'D'}
-        ]
-      }
-    },
-    methods: {
-      change() {
-        this.items.reverse().push({id: 4, val: 'E'})
-      }
+    // 局部注册 局部注册是将当前注册的组件合并到Sub.options，即：合并到当前的vm实例上，只能在当前的vm实例上使用
+    components: {
+      HelloWorld
     }
   }
 </script>
@@ -43,5 +26,4 @@
     color: #2c3e50;
     margin-top: 60px;
   }
-
 </style>

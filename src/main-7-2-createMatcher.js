@@ -8,6 +8,8 @@ Vue.use(VueRouter)
  * 断点位置：
  *  1、在node_modules中的vue-router中的vue-router.esm.js中的 function createMatcher (routes,router) {debugger...}
  *
+ *  00:23:33~00:36:22   createMatcher()的介绍
+ *  00:36:22～00:41:32  createMatcher()的单步调试
  **/
 // 1. 定义路由组件
 // 可以从其他文件 import 进来
@@ -19,9 +21,11 @@ const Bar = {template: '<div>bar</div>'}
 const routes = [
     {   path: '/foo',
         component: Foo,
+        name:'Foo',
         children:[
             {
                 path: '/bar',
+                name:'Bar',
                 component: Bar
             },
         ]
@@ -43,3 +47,20 @@ const app = new Vue({
     },
     router
 })
+
+/***
+ *
+ * createRouteMap()调用的返回值：
+ *
+ * pathList: ["/bar", "/foo"]
+ * pathMap:{
+ *      "/bar":{"path":"/bar","regex":{"keys":[]},"components":{"default":{"template":"<div>bar</div>"}},"instances":{},"enteredCbs":{},"name":"Bar","parent":{"path":"/foo","regex":{"keys":[]},"components":{"default":{"template":"<div>foo</div>"}},"instances":{},"enteredCbs":{},"name":"Foo","meta":{},"props":{}},"meta":{},"props":{}},
+ *      "/foo":{"path":"/foo","regex":{"keys":[]},"components":{"default":{"template":"<div>foo</div>"}},"instances":{},"enteredCbs":{},"name":"Foo","meta":{},"props":{}}
+ *      }
+ *
+ * nameMap:{
+ *      "Bar":{"path":"/bar","regex":{"keys":[]},"components":{"default":{"template":"<div>bar</div>"}},"instances":{},"enteredCbs":{},"name":"Bar","parent":{"path":"/foo","regex":{"keys":[]},"components":{"default":{"template":"<div>foo</div>"}},"instances":{},"enteredCbs":{},"name":"Foo","meta":{},"props":{}},"meta":{},"props":{}},
+ *      "Foo":{"path":"/foo","regex":{"keys":[]},"components":{"default":{"template":"<div>foo</div>"}},"instances":{},"enteredCbs":{},"name":"Foo","meta":{},"props":{}}
+ *      }
+ *
+ * */

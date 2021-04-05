@@ -28,4 +28,33 @@ new Vue({
   }
 })
 
+/**
+ *
+ * parse生成的ast树：
+ attrsList: []
+ attrsMap: {:class: "bindCls", class: "list", v-if: "isShow"}
+ children: Array(1)
+   0: {type: 1, tag: "li", attrsList: Array(1), attrsMap: {…}, rawAttrsMap: {…}, …}
+   length: 1
+   __proto__: Array(0)
+ classBinding: "bindCls"
+ end: 135
+ if: "isShow"
+ ifConditions: [{…}]
+ parent: undefined
+ plain: false
+ rawAttrsMap:
+   :class: {name: ":class", value: "bindCls", start: 4, end: 20}
+   class: {name: "class", value: "list", start: 21, end: 33}
+   v-if: {name: "v-if", value: "isShow", start: 34, end: 47}
+   __proto__: Object
+ start: 0
+ staticClass: ""list""
+ tag: "ul"
+ type: 1
+ *
+ *
+ *
+ */
+
 

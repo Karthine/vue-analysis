@@ -8,8 +8,7 @@ Vue.config.productionTip = false
  * todo 注意：也需要在index.html里面写上css过渡样式变化
  * 源码是在：src/platforms/web/runtime/components/transition-group.js中
  *
- *
-
+ *01:20:58~02:07~53 transition-group
  **/
 
 // todo transition-group 上的tag表示transition-group最终渲染成的标签

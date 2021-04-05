@@ -10,7 +10,9 @@ Vue.config.productionTip = false
  *     其实分析源码可知：（）
  *        源码地址：src/platforms/web/runtime/modules/transition.js中
  *        transition处理动画只是管理什么时候添加对应的类名，即class,而真正做动画的是我们自己写的css过渡动画样式
- 
+ *
+ * 00:54:00~00:54:00 transition
+
  **/
 
 

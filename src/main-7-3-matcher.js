@@ -8,6 +8,8 @@ Vue.use(VueRouter)
  * 断点位置：
  *  1、在node_modules中的vue-router中的vue-router.esm.js中的   function match (raw,currentRoute,redirectedFrom) {debugger....}
  *
+ *  00:41:32~00:54:02  match()的过程
+ *  00:54:02～00:59:40  match()的单步调试
  **/
 // 1. 定义路由组件
 // 可以从其他文件 import 进来

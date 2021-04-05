@@ -46,6 +46,8 @@ Vue.config.productionTip = false
  *           init: function init (vnode, hydrating) { debugger...}
  *          prepatch: function prepatch (oldVnode, vnode) {debugger...}
  *          insert: function insert (vnode) {debugger...}
+ *
+ *          00:00:00~00:54:00 keep-alive
  **/
 
 let A = {
